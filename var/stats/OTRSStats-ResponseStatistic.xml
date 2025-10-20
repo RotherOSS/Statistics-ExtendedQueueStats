@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<otrs_stats>
+<Cache>0</Cache>
+<Description>A statistic to count the responses used, i.e. how many times has the response &quot;Delivery Missing&quot; be used in the last 30 days.</Description>
+<Format>CSV</Format>
+<Format>Print</Format>
+<GraphSize></GraphSize>
+<Object></Object>
+<ObjectModule>Kernel::System::Stats::Static::OTRSStatsResponseStatistic</ObjectModule>
+<Permission>admin</Permission>
+<Permission>stats</Permission>
+<StatType>static</StatType>
+<SumCol>0</SumCol>
+<SumRow>0</SumRow>
+<Title>Response Statistic</Title>
+<Valid>1</Valid>
+</otrs_stats>

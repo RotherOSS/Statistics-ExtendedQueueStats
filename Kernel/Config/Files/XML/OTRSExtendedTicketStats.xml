@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <!-- OTRSStatsQueueRestingTime -->
+    <Setting Name="Stats::DynamicObjectRegistration###OTRSStatsQueueRestingTime" Required="0" Valid="1">
+        <Description Translatable="1">Module to generate statistics about ticket duration of stay in queues.</Description>
+        <Navigation>Core::Stats</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Stats::Dynamic::OTRSStatsQueueRestingTime</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="QueueRestingTime::HistorySearchLimit" Required="0" Valid="1">
+        <Description Translatable="1">This setting defines a limit for query results on ticket history table for OTRSStatsQueueRestingTime stat.</Description>
+        <Navigation>Core::Stats</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">50000</Item>
+        </Value>
+    </Setting>
+    <!-- OTRSStatsQueueWorkingTime -->
+    <Setting Name="Stats::DynamicObjectRegistration###OTRSStatsQueueWorkingTime" Required="0" Valid="1">
+        <Description Translatable="1">A modified ticket list statistic to display the working time per queue.</Description>
+        <Navigation>Core::Stats</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Stats::Dynamic::OTRSStatsQueueWorkingTime</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>
