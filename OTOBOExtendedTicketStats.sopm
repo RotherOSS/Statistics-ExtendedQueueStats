@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otobo_package version="1.0">
+    <Name>OTOBOExtendedTicketStats</Name>
+    <Version>10.1.0</Version>
+    <Framework Minimum="10.1.0">10.1.x</Framework>
+    <Vendor>Rother OSS GmbH</Vendor>
+    <URL>https://otobo.io/</URL>
+    <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+    <Description Lang="en">The ExtendedTicketStats package.</Description>
+    <Description Lang="de">Das ExtendedTicketStats Paket.</Description>
+    <Description Lang="hu">A kiterjesztett jegystatisztikák csomag.</Description>
+    <IntroInstall Lang="en" Title="Install Information" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;WELCOME&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        You are about to install the OTRS package OTRSExtendedTicketStats.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroInstall>
+    <IntroInstall Lang="de" Title="Installation Information" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;WILLKOMMEN&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        Sie sind im Begriff das OTRS-Paket OTRSExtendedTicketStats zu installieren.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroInstall>
+    <IntroInstall Lang="hu" Title="Telepítési információk" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        Ön az OTRSExtendedTicketStats OTRS csomag telepítésére készül.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroInstall>
+    <IntroUpgrade Lang="en" Title="Upgrade Information" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;WELCOME&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        You are about to upgrade the OTRS package OTRSExtendedTicketStats.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroUpgrade>
+    <IntroUpgrade Lang="de" Title="Upgrade Information" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;WILLKOMMEN&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        Sie sind im Begriff das OTRS-Paket OTRSExtendedTicketStats zu aktualisieren.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroUpgrade>
+    <IntroUpgrade Lang="hu" Title="Frissítési információk" Type="pre">
+        &lt;br/&gt;
+        &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        Ön az OTRSExtendedTicketStats OTRS csomag frissítésére készül.&lt;br/&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+        ((enjoy))&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroUpgrade>
+    <PackageMerge Name="OTRSStatsResponseStatistic" TargetVersion="1.3.3"></PackageMerge>
+    <CodeInstall Type="post">
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}-&gt;{Name}-&gt;{Content};
+
+        $Kernel::OM-&gt;Get($CodeModule)-&gt;CodeInstall();
+    </CodeInstall>
+    <CodeUpgrade Type="post">
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}-&gt;{Name}-&gt;{Content};
+
+        $Kernel::OM-&gt;Get($CodeModule)-&gt;CodeUpgrade();
+    </CodeUpgrade>
+    <CodeUninstall Type="pre">
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}-&gt;{Name}-&gt;{Content};
+
+        $Kernel::OM-&gt;Get($CodeModule)-&gt;CodeUninstall();
+    </CodeUninstall>
+    <CodeReinstall Type="post">
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}-&gt;{Name}-&gt;{Content};
+
+        $Kernel::OM-&gt;Get($CodeModule)-&gt;CodeReinstall();
+    </CodeReinstall>
+    <Filelist>
+        <File Permission="660" Location="Kernel/Config/Files/XML/OTRSExtendedTicketStats.xml" />
+        <File Permission="660" Location="Kernel/Language/de_OTRSExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/Language/hu_OTRSExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTRSStatsQueueRestingTime.pm" />
+        <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTRSStatsQueueWorkingTime.pm" />
+        <File Permission="660" Location="Kernel/System/Stats/Static/OTRSStatsResponseStatistic.pm" />
+        <File Permission="660" Location="doc/en/OTRSExtendedTicketStats.pdf" />
+        <File Permission="660" Location="scripts/test/OTRSStatsQueueRestingTime.t" />
+        <File Permission="660" Location="scripts/test/OTRSStatsQueueWorkingTime.t" />
+        <File Permission="660" Location="scripts/test/OTRSStatsResponseStatistic.t" />
+        <File Permission="660" Location="var/packagesetup/OTRSExtendedTicketStats.pm" />
+        <File Permission="660" Location="var/stats/OTRSStats-ResponseStatistic.xml" />
+    </Filelist>
+</otobo_package>
