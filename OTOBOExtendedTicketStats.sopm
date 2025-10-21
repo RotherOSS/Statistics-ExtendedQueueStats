@@ -17,11 +17,11 @@
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTOBOStatsQueueWorkingTime.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Static/OTOBOStatsResponseStatistic.pm" />
         <File Permission="660" Location="doc/en/OTRSExtendedTicketStats.pdf" />
-        <File Permission="660" Location="scripts/test/OTRSStatsQueueRestingTime.t" />
-        <File Permission="660" Location="scripts/test/OTRSStatsQueueWorkingTime.t" />
-        <File Permission="660" Location="scripts/test/OTRSStatsResponseStatistic.t" />
+        <File Permission="660" Location="scripts/test/OTOBOStatsQueueRestingTime.t" />
+        <File Permission="660" Location="scripts/test/OTOBOStatsQueueWorkingTime.t" />
+        <File Permission="660" Location="scripts/test/OTOBOStatsResponseStatistic.t" />
         <File Permission="660" Location="var/packagesetup/OTOBOExtendedTicketStats.pm" />
-        <File Permission="660" Location="var/stats/OTRSStats-ResponseStatistic.xml" />
+        <File Permission="660" Location="var/stats/OTOBOStats-ResponseStatistic.xml" />
     </Filelist>
     <CodeInstall Type="post"><![CDATA[
 
