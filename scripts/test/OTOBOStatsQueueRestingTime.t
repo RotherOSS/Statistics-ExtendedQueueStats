@@ -19,11 +19,15 @@ use warnings;
 use vars (qw($Self));
 use utf8;
 
+# Set up the test driver $Self when we are running as a standalone script.
+use Kernel::System::UnitTest::MockTime qw(:all);
+use Kernel::System::UnitTest::RegisterDriver;
+
 use Kernel::System::VariableCheck qw(:all);
 
 # create local objects
 my $UserID = 1;
-local $Kernel::OM = Kernel::System::ObjectManager->new(
+$Kernel::OM->ObjectParamAdd(
     'Kernel::System::Stats' => {
         UserID => $UserID,
     },
@@ -831,7 +835,7 @@ for my $Ticket ( sort keys %{$TestTickets} ) {
     my $FirstAction = shift @Actions;
 
     # set action time
-    $HelperObject->FixedTimeSet(
+    FixedTimeSet(
         $TimeStamp2Epoch->( TimeStamp => $FirstAction->{TimeStamp} ),
     );
 
@@ -853,7 +857,7 @@ for my $Ticket ( sort keys %{$TestTickets} ) {
     for my $Action (@Actions) {
 
         # set action time
-        $HelperObject->FixedTimeSet(
+        FixedTimeSet(
             $TimeStamp2Epoch->( TimeStamp => $Action->{TimeStamp} ),
         );
 
@@ -882,6 +886,9 @@ for my $Ticket ( sort keys %{$TestTickets} ) {
             );
         }
     }
+}
+continue {
+    FixedTimeUnset();
 }
 
 # get cache object
@@ -978,4 +985,4 @@ $CacheObject->CleanUp(
     Type => 'Queue',
 );
 
-1;
+$Self->DoneTesting();

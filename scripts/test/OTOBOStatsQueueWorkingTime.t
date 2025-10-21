@@ -20,6 +20,10 @@ use warnings;
 use vars (qw($Self));
 use utf8;
 
+# Set up the test driver $Self when we are running as a standalone script.
+use Kernel::System::UnitTest::MockTime qw(:all);
+use Kernel::System::UnitTest::RegisterDriver;
+
 use Kernel::System::VariableCheck qw(:all);
 
 my $TimeStamp2Epoch = sub {
@@ -1137,7 +1141,7 @@ my $HelperObject                     = $Kernel::OM->Get('Kernel::System::UnitTes
 my $OTOBOStatsQueueWorkingTimeObject = $Kernel::OM->Get('Kernel::System::Stats::Dynamic::OTOBOStatsQueueWorkingTime');
 
 for my $Test (@Tests) {
-    $HelperObject->FixedTimeSet(
+    FixedTimeSet(
         $TimeStamp2Epoch->( TimeStamp => $Test->{Date} ),
     );
 
@@ -1159,7 +1163,7 @@ for my $Test (@Tests) {
     );
 
     for my $Action ( @{ $Test->{Actions} } ) {
-        $HelperObject->FixedTimeSet(
+        FixedTimeSet(
             $TimeStamp2Epoch->( TimeStamp => $Action->{Date} ),
         );
 
@@ -1229,7 +1233,8 @@ for my $Test (@Tests) {
         $Test->{Name} . ' - Delete ticket id \'' . $TicketID . '\'',
     );
 }
+continue {
+    FixedTimeUnset();
+}
 
-$HelperObject->FixedTimeUnset();
-
-1;
+$Self->DoneTesting();

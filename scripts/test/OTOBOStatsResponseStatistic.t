@@ -19,12 +19,16 @@ use warnings;
 use vars (qw($Self));
 use utf8;
 
+# Set up the test driver $Self when we are running as a standalone script.
+use Kernel::System::UnitTest::MockTime qw(:all);
+use Kernel::System::UnitTest::RegisterDriver;
+
 use Kernel::System::VariableCheck qw(:all);
 
 # define local variables
 my $UserID = 1;
 
-local $Kernel::OM = Kernel::System::ObjectManager->new(
+$Kernel::OM->ObjectParamAdd(
     'Kernel::System::Stats' => {
         UserID => $UserID,
     },
@@ -352,7 +356,7 @@ my %ExpectedResults;
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
 # set action time
-$HelperObject->FixedTimeSet(
+FixedTimeSet(
     $TimeStamp2Epoch->( TimeStamp => '1989-12-31 17:00:00' ),
 );
 
@@ -364,7 +368,7 @@ for my $Test (@Tests) {
 
     # set action time
     if ( $FirstAction->{TimeStamp} ne '1989-12-31 17:00:00' ) {
-        $HelperObject->FixedTimeSet(
+        FixedTimeSet(
             $TimeStamp2Epoch->( TimeStamp => $FirstAction->{TimeStamp} ),
         );
     }
@@ -391,7 +395,7 @@ for my $Test (@Tests) {
     for my $Action (@Actions) {
 
         # set action time
-        $HelperObject->FixedTimeSet(
+        FixedTimeSet(
             $TimeStamp2Epoch->( TimeStamp => $Action->{TimeStamp} ),
         );
 
@@ -441,6 +445,9 @@ for my $Test (@Tests) {
             $Index++;
         }
     }
+}
+continue {
+    FixedTimeUnset();
 }
 
 # clear cache
@@ -501,4 +508,4 @@ $Self->IsDeeply(
 
 # no cleanup is needed as the unit test rolls back the transaction
 
-1;
+$Self->DoneTesting();
