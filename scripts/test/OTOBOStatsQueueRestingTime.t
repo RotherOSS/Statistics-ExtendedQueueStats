@@ -129,7 +129,7 @@ my $StatsStartTimeStamp  = '1989-12-31 23:00:00';
 my $StatsStopSystemTime  = '631148500';
 my $StatsStopTimeStamp   = '1989-12-31 23:01:40';
 
-# set OTOBOExtendedTicketStats and add restrictions
+# set ExtendedTicketStats and add restrictions
 my $StatsRestrictions = {
     UseAsXvalue => [
         {

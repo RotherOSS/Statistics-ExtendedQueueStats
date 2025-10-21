@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package var::packagesetup::OTOBOExtendedTicketStats;
+package var::packagesetup::ExtendedTicketStats;
 
 use strict;
 use warnings;
@@ -27,7 +27,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-var::packagesetup::OTOBOExtendedTicketStats - code to execute during package installation
+var::packagesetup::ExtendedTicketStats - code to execute during package installation
 
 =head1 PUBLIC INTERFACE
 
@@ -39,7 +39,7 @@ create an object
 
     use Kernel::System::ObjectManager;
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $CodeObject = $Kernel::OM->Get('var::packagesetup::OTOBOExtendedTicketStats');
+    my $CodeObject = $Kernel::OM->Get('var::packagesetup::ExtendedTicketStats');
 
 =cut
 

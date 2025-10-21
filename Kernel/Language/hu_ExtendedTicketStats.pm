@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::Language::hu_OTOBOExtendedTicketStats;
+package Kernel::Language::hu_ExtendedTicketStats;
 
 use strict;
 use warnings;

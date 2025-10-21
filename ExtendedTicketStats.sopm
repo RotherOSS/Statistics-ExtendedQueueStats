@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otobo_package version="1.0">
-    <Name>OTOBOExtendedTicketStats</Name>
+    <Name>ExtendedTicketStats</Name>
     <Version>0.0.0</Version>
     <Framework Minimum="10.1.0">10.1.x</Framework>
     <Vendor>Rother OSS GmbH</Vendor>
@@ -10,9 +10,9 @@
     <Description Lang="de">Das ExtendedTicketStats Paket.</Description>
     <Description Lang="hu">A kiterjesztett jegystatisztikák csomag.</Description>
     <Filelist>
-        <File Permission="660" Location="Kernel/Config/Files/XML/OTOBOExtendedTicketStats.xml" />
-        <File Permission="660" Location="Kernel/Language/de_OTOBOExtendedTicketStats.pm" />
-        <File Permission="660" Location="Kernel/Language/hu_OTOBOExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/Config/Files/XML/ExtendedTicketStats.xml" />
+        <File Permission="660" Location="Kernel/Language/de_ExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/Language/hu_ExtendedTicketStats.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTOBOStatsQueueRestingTime.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTOBOStatsQueueWorkingTime.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Static/OTOBOStatsResponseStatistic.pm" />
@@ -20,7 +20,7 @@
         <File Permission="660" Location="scripts/test/OTOBOStatsQueueRestingTime.t" />
         <File Permission="660" Location="scripts/test/OTOBOStatsQueueWorkingTime.t" />
         <File Permission="660" Location="scripts/test/OTOBOStatsResponseStatistic.t" />
-        <File Permission="660" Location="var/packagesetup/OTOBOExtendedTicketStats.pm" />
+        <File Permission="660" Location="var/packagesetup/ExtendedTicketStats.pm" />
         <File Permission="660" Location="var/stats/OTOBOStats-ResponseStatistic.xml" />
     </Filelist>
     <CodeInstall Type="post"><![CDATA[
@@ -57,7 +57,7 @@
         &lt;strong&gt;WELCOME&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        You are about to install the OTOBO package OTOBOExtendedTicketStats.&lt;br/&gt;
+        You are about to install the OTOBO package ExtendedTicketStats.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -68,7 +68,7 @@
         &lt;strong&gt;WILLKOMMEN&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Sie sind im Begriff das OTOBO-Paket OTOBOExtendedTicketStats zu installieren.&lt;br/&gt;
+        Sie sind im Begriff das OTOBO-Paket ExtendedTicketStats zu installieren.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -79,7 +79,7 @@
         &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Ön az OTOBOExtendedTicketStats OTOBO csomag telepítésére készül.&lt;br/&gt;
+        Ön az ExtendedTicketStats OTOBO csomag telepítésére készül.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -90,7 +90,7 @@
         &lt;strong&gt;WELCOME&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        You are about to upgrade the OTOBO package OTOBOExtendedTicketStats.&lt;br/&gt;
+        You are about to upgrade the OTOBO package ExtendedTicketStats.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -101,7 +101,7 @@
         &lt;strong&gt;WILLKOMMEN&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Sie sind im Begriff das OTOBO-Paket OTOBOExtendedTicketStats zu aktualisieren.&lt;br/&gt;
+        Sie sind im Begriff das OTOBO-Paket ExtendedTicketStats zu aktualisieren.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -112,7 +112,7 @@
         &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Ön az OTOBOExtendedTicketStats OTOBO csomag frissítésére készül.&lt;br/&gt;
+        Ön az ExtendedTicketStats OTOBO csomag frissítésére készül.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
