@@ -235,7 +235,7 @@ sub GetStatTable {
 
     my $StateObject = $Kernel::OM->Get('Kernel::System::State');
 
-    # get all relevant states (exluding merged and removed state types)
+    # get all relevant states (excluding merged and removed state types)
     my %StateTypeList = $StateObject->StateTypeList( UserID => 1 );
     my @OpenStateTypes;
     my @ClosedStateTypes = ('closed');
