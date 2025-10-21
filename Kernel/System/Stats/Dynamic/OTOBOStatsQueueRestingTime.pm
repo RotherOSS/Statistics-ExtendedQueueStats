@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Stats::Dynamic::OTRSStatsQueueRestingTime;
+package Kernel::System::Stats::Dynamic::OTOBOStatsQueueRestingTime;
 
 use strict;
 use warnings;

@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Stats::Static::OTRSStatsResponseStatistic;
+package Kernel::System::Stats::Static::OTOBOStatsResponseStatistic;
 
 use strict;
 use warnings;

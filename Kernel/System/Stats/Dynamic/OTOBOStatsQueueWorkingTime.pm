@@ -14,8 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
-package Kernel::System::Stats::Dynamic::OTRSStatsQueueWorkingTime;
+package Kernel::System::Stats::Dynamic::OTOBOStatsQueueWorkingTime;
 
 use strict;
 use warnings;
