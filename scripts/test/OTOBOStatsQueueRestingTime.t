@@ -34,7 +34,7 @@ local $Kernel::OM = Kernel::System::ObjectManager->new(
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
-$Self->{UnitTestPrefix} = 'UnitTest-OTRSStatsQueueRestingTime';
+$Self->{UnitTestPrefix} = 'UnitTest-OTOBOStatsQueueRestingTime';
 
 my $TimeStamp2Epoch = sub {
     my %Param = @_;
@@ -125,7 +125,7 @@ my $StatsStartTimeStamp  = '1989-12-31 23:00:00';
 my $StatsStopSystemTime  = '631148500';
 my $StatsStopTimeStamp   = '1989-12-31 23:01:40';
 
-# set OTRSExtendedTicketStats and add restrictions
+# set OTOBOExtendedTicketStats and add restrictions
 my $StatsRestrictions = {
     UseAsXvalue => [
         {
@@ -211,7 +211,7 @@ my $Update = $StatsObject->StatsUpdate(
         Description  => 'some Description',
         Object       => 'Ticket',
         Format       => ['CSV'],
-        ObjectModule => 'Kernel::System::Stats::Dynamic::OTRSStatsQueueRestingTime',
+        ObjectModule => 'Kernel::System::Stats::Dynamic::OTOBOStatsQueueRestingTime',
         Permission   => ['1'],
         StatType     => 'dynamic',
         Valid        => '1',

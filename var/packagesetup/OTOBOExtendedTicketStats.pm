@@ -67,7 +67,7 @@ sub new {
     );
 
     # define file prefix
-    $Self->{FilePrefix} = 'OTRSStats';
+    $Self->{FilePrefix} = 'OTOBOStats';
 
     return $Self;
 }

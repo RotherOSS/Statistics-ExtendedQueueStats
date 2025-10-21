@@ -52,7 +52,7 @@ my $TimeStamp2Epoch = sub {
 # get stats object
 my $StatsObject = $Kernel::OM->Get('Kernel::System::Stats');
 
-$Self->{UnitTestPrefix} = 'UnitTest-OTRSStatsResponseStatistic';
+$Self->{UnitTestPrefix} = 'UnitTest-OTOBOStatsResponseStatistic';
 
 # add stats
 my $StatID = $StatsObject->StatsAdd( UserID => $UserID );
@@ -64,11 +64,11 @@ $Self->True(
 my $Update = $StatsObject->StatsUpdate(
     StatID => $StatID,
     Hash   => {
-        Title        => 'OTRSStatsResponseStatistic Unit Test',
+        Title        => 'OTOBOStatsResponseStatistic Unit Test',
         Description  => 'Test Results',
         Object       => '',
         Format       => ['CSV'],
-        ObjectModule => 'Kernel::System::Stats::Static::OTRSStatsResponseStatistic',
+        ObjectModule => 'Kernel::System::Stats::Static::OTOBOStatsResponseStatistic',
         Permission   => ['1'],
         StatType     => 'static',
         Valid        => '1',
@@ -481,7 +481,7 @@ RESULT:
 for my $Result (@StatResults) {
 
     # discard results from other templates
-    next RESULT if $Result->[0] !~ m{UnitTest-OTRSStatsResponseStatistic[1|2]test\d+};
+    next RESULT if $Result->[0] !~ m{UnitTest-OTOBOStatsResponseStatistic[1|2]test\d+};
 
     my @StoreResult = @{$Result};
 

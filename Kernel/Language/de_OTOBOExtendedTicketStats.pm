@@ -23,7 +23,7 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # Perl Module: Kernel/System/Stats/Dynamic/OTRSStatsQueueRestingTime.pm
+    # Perl Module: Kernel/System/Stats/Dynamic/OTOBOStatsQueueRestingTime.pm
     $Self->{Translation}->{'Reporting Timeslot'} = 'Berichte-Zeitspanne';
     $Self->{Translation}->{'Ticket ID'} = 'Ticket-Nummer';
     $Self->{Translation}->{'Queue join time'} = 'Queue Eingangszeitpunkt';
@@ -33,7 +33,7 @@ sub Data {
     $Self->{Translation}->{'Resting time (Working hours, seconds)'} = 'Verweildauer (Arbeitszeit, Sekunden)';
     $Self->{Translation}->{'Resting time (Working hours, HH:MM:SS)'} = 'Verweildauer (Arbeitszeit, HH:MM:SS)';
 
-    # Perl Module: Kernel/System/Stats/Static/OTRSStatsResponseStatistic.pm
+    # Perl Module: Kernel/System/Stats/Static/OTOBOStatsResponseStatistic.pm
     $Self->{Translation}->{'Start Day'} = 'Start-Tag';
     $Self->{Translation}->{'Start Month'} = 'Start-Monat';
     $Self->{Translation}->{'Start Year'} = 'Start-Jahr';
@@ -47,8 +47,8 @@ sub Data {
         'Eine angepasste TicketList-Statistik, um die Arbeitszeit pro Queue anzuzeigen.';
     $Self->{Translation}->{'Module to generate statistics about ticket duration of stay in queues.'} =
         'Modul zum Erstellen von Statistiken über die Verweildauer von Tickets in Queues.';
-    $Self->{Translation}->{'This setting defines a limit for query results on ticket history table for OTRSStatsQueueRestingTime stat.'} =
-        'Diese Einstellung definiert eine Limitierung von Suchergebnissen der Ticket-Historie für die Statistik OTRSStatsQueueRestingTime.';
+    $Self->{Translation}->{'This setting defines a limit for query results on ticket history table for OTOBOStatsQueueRestingTime stat.'} =
+        'Diese Einstellung definiert eine Limitierung von Suchergebnissen der Ticket-Historie für die Statistik OTOBOStatsQueueRestingTime.';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

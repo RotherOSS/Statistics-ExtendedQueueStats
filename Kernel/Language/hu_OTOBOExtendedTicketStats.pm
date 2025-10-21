@@ -23,7 +23,7 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # Perl Module: Kernel/System/Stats/Dynamic/OTRSStatsQueueRestingTime.pm
+    # Perl Module: Kernel/System/Stats/Dynamic/OTOBOStatsQueueRestingTime.pm
     $Self->{Translation}->{'Reporting Timeslot'} = 'Jelentéskészítés időrése';
     $Self->{Translation}->{'Ticket ID'} = 'Jegyazonosító';
     $Self->{Translation}->{'Queue join time'} = 'Várólista-belépési idő';
@@ -33,7 +33,7 @@ sub Data {
     $Self->{Translation}->{'Resting time (Working hours, seconds)'} = 'Pihenési idő (munkaidő, másodperc)';
     $Self->{Translation}->{'Resting time (Working hours, HH:MM:SS)'} = 'Pihenési idő (munkaidő, ÓÓ:PP:MM)';
 
-    # Perl Module: Kernel/System/Stats/Static/OTRSStatsResponseStatistic.pm
+    # Perl Module: Kernel/System/Stats/Static/OTOBOStatsResponseStatistic.pm
     $Self->{Translation}->{'Start Day'} = 'Kezdés napja';
     $Self->{Translation}->{'Start Month'} = 'Kezdés hónapja';
     $Self->{Translation}->{'Start Year'} = 'Kezdés éve';
@@ -47,7 +47,7 @@ sub Data {
         'Egy módosított jegylista statisztika a várólistánkénti munkaidő megjelenítéséhez.';
     $Self->{Translation}->{'Module to generate statistics about ticket duration of stay in queues.'} =
         'Egy modul statisztikák előállításához arról, hogy egy jegy mennyi időt töltött a várólistákban.';
-    $Self->{Translation}->{'This setting defines a limit for query results on ticket history table for OTRSStatsQueueRestingTime stat.'} =
+    $Self->{Translation}->{'This setting defines a limit for query results on ticket history table for OTOBOStatsQueueRestingTime stat.'} =
         'Ez a beállítás meghatározza a lekérdezési eredmények korlátját a jegyelőzmények táblánál a várólistákban eltöltött pihenési idő statisztikához.';
 
 

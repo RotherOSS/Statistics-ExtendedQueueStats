@@ -80,7 +80,7 @@ sub new {
 sub GetObjectName {
     my ( $Self, %Param ) = @_;
 
-    return 'OTRSStatsQueueWorkingTime';
+    return 'OTOBOStatsQueueWorkingTime';
 }
 
 sub GetObjectBehaviours {

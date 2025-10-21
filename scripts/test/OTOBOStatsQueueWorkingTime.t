@@ -1130,11 +1130,11 @@ my @Tests = (
 );
 
 # create local objects
-my $QueueObject                     = $Kernel::OM->Get('Kernel::System::Queue');
-my $StateObject                     = $Kernel::OM->Get('Kernel::System::State');
-my $TicketObject                    = $Kernel::OM->Get('Kernel::System::Ticket');
-my $HelperObject                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $OTRSStatsQueueWorkingTimeObject = $Kernel::OM->Get('Kernel::System::Stats::Dynamic::OTRSStatsQueueWorkingTime');
+my $QueueObject                      = $Kernel::OM->Get('Kernel::System::Queue');
+my $StateObject                      = $Kernel::OM->Get('Kernel::System::State');
+my $TicketObject                     = $Kernel::OM->Get('Kernel::System::Ticket');
+my $HelperObject                     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $OTOBOStatsQueueWorkingTimeObject = $Kernel::OM->Get('Kernel::System::Stats::Dynamic::OTOBOStatsQueueWorkingTime');
 
 for my $Test (@Tests) {
     $HelperObject->FixedTimeSet(
@@ -1203,7 +1203,7 @@ for my $Test (@Tests) {
         UserID   => 1,
     );
 
-    $OTRSStatsQueueWorkingTimeObject->_ModifyTicketQueueTimes(
+    $OTOBOStatsQueueWorkingTimeObject->_ModifyTicketQueueTimes(
         Ticket => \%Ticket,
     );
 
