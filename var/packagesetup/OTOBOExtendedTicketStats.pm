@@ -1,12 +1,20 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# OTOBO is a web-based ticketing system for service organisations.
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package var::packagesetup::OTRSExtendedTicketStats;
+package var::packagesetup::OTOBOExtendedTicketStats;
 
 use strict;
 use warnings;
@@ -19,13 +27,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-var::packagesetup::OTRSExtendedTicketStats - code to execute during package installation
-
-=head1 DESCRIPTION
-
-All functions
+var::packagesetup::OTOBOExtendedTicketStats - code to execute during package installation
 
 =head1 PUBLIC INTERFACE
+
+=cut
 
 =head2 new()
 
@@ -33,7 +39,7 @@ create an object
 
     use Kernel::System::ObjectManager;
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $CodeObject = $Kernel::OM->Get('var::packagesetup::OTRSExtendedTicketStats');
+    my $CodeObject = $Kernel::OM->Get('var::packagesetup::OTOBOExtendedTicketStats');
 
 =cut
 
@@ -41,8 +47,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     # Force a reload of ZZZAuto.pm and ZZZAAuto.pm to get the fresh configuration values.
     for my $Module ( sort keys %INC ) {
@@ -148,13 +153,3 @@ sub CodeUninstall {
 }
 
 1;
-
-=head1 TERMS AND CONDITIONS
-
-This software is part of the OTRS project (L<https://otrs.org/>).
-
-This software comes with ABSOLUTELY NO WARRANTY. For details, see
-the enclosed file COPYING for license information (GPL). If you
-did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
-
-=cut

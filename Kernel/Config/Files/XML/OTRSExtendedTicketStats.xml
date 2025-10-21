@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_config version="2.0" init="Application">
+<otobo_config version="2.0" init="Application">
     <!-- OTRSStatsQueueRestingTime -->
     <Setting Name="Stats::DynamicObjectRegistration###OTRSStatsQueueRestingTime" Required="0" Valid="1">
         <Description Translatable="1">Module to generate statistics about ticket duration of stay in queues.</Description>
@@ -28,4 +28,4 @@
         </Value>
     </Setting>
 
-</otrs_config>
+</otobo_config>

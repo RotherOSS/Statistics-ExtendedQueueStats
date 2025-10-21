@@ -1,12 +1,19 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# OTOBO is a web-based ticketing system for service organisations.
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
 use strict;
 use warnings;
 use vars (qw($Self));
@@ -248,7 +255,7 @@ my $GetTestTicketDefinition = sub {
         },
         'created before timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                  # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
                         $StatsStartSystemTime - 5,                           # Created
@@ -273,7 +280,7 @@ my $GetTestTicketDefinition = sub {
         },
         'created after timeframe' => {
             ExpectedResult => {
-                Listed => 0,                                  # 1 or 0
+                Listed => 0,    # 1 or 0
             },
             TicketData => [
                 {
@@ -286,7 +293,7 @@ my $GetTestTicketDefinition = sub {
         },
         'created within timeframe, non-reported queue' => {
             ExpectedResult => {
-                Listed => 0,                                    # 1 or 0
+                Listed => 0,    # 1 or 0
             },
             TicketData => [
                 {
@@ -299,98 +306,98 @@ my $GetTestTicketDefinition = sub {
         },
         'created within timeframe, closed instantly' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 5,              # Changed
-                        $StatsStartSystemTime + 5,              # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 5,              # QueueLeftTime
-                        0,                                      # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,    # Created
+                        $StatsStartSystemTime + 5,    # Changed
+                        $StatsStartSystemTime + 5,    # Closed
+                        'closed',                     # State
+                        1,                            # Queue
+                        $StatsStartSystemTime + 5,    # QueueJoinTime
+                        $StatsStartSystemTime + 5,    # QueueLeftTime
+                        0,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'closed',                    # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
             ],
         },
         'created before and closed within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        $StatsStartSystemTime + 55,             # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime - 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        60,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime - 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        $StatsStartSystemTime + 55,    # Closed
+                        'closed',                      # State
+                        1,                             # Queue
+                        $StatsStartSystemTime - 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        60,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime - 5,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and closed before timeframe' => {
             ExpectedResult => {
-                Listed => 0,                                    # 1 or 0
+                Listed => 0,    # 1 or 0
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime - 5,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',               # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                    # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime - 1,
                 },
             ],
         },
         'created before and closed after timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 105,            # Changed
-                        $StatsStartSystemTime + 105,            # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime - 5,              # QueueJoinTime
-                        '',                                     # QueueLeftTime
-                        105,                                    # RestingTimeSeconds
+                        $StatsStartSystemTime - 5,      # Created
+                        $StatsStartSystemTime + 105,    # Changed
+                        $StatsStartSystemTime + 105,    # Closed
+                        'closed',                       # State
+                        1,                              # Queue
+                        $StatsStartSystemTime - 5,      # QueueJoinTime
+                        '',                             # QueueLeftTime
+                        105,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime - 5,
                 },
                 {
@@ -402,384 +409,384 @@ my $GetTestTicketDefinition = sub {
         },
         'created and closed within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        $StatsStartSystemTime + 55,             # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        50,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        $StatsStartSystemTime + 55,    # Closed
+                        'closed',                      # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        50,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and closed with state in between within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        $StatsStartSystemTime + 55,             # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        50,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        $StatsStartSystemTime + 55,    # Closed
+                        'closed',                      # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        50,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'pending reminder',            # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'pending reminder',           # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 25,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created, closed, reopened and reclosed within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        $StatsStartSystemTime + 55,             # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        41,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        $StatsStartSystemTime + 55,    # Closed
+                        'closed',                      # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        41,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 19,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'pending reminder',            # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'pending reminder',           # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 28,
                 },
                 {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                    Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and moved between reported queues within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        50,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        50,                            # RestingTimeSeconds
                     ],
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 55,             # QueueJoinTime
-                        '',                                     # QueueLeftTime
-                        45,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        2,                             # Queue
+                        $StatsStartSystemTime + 55,    # QueueJoinTime
+                        '',                            # QueueLeftTime
+                        45,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and moved from non-reported to reported queue within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 55,             # QueueJoinTime
-                        '',                                     # QueueLeftTime
-                        45,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        2,                             # Queue
+                        $StatsStartSystemTime + 55,    # QueueJoinTime
+                        '',                            # QueueLeftTime
+                        45,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 3,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 3,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and moved from reported to non-reported queue within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 55,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        50,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 55,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        50,                            # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 3,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 3,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
             ],
         },
         'created and moved multiple times between reported queues within timeframe' => {
             ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
+                Listed => 1,    # 1 or 0
                 Data   => [
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 95,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 55,             # QueueLeftTime
-                        50,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 95,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 5,     # QueueJoinTime
+                        $StatsStartSystemTime + 55,    # QueueLeftTime
+                        50,                            # RestingTimeSeconds
                     ],
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 95,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 55,             # QueueJoinTime
-                        $StatsStartSystemTime + 65,             # QueueLeftTime
-                        10,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 95,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        2,                             # Queue
+                        $StatsStartSystemTime + 55,    # QueueJoinTime
+                        $StatsStartSystemTime + 65,    # QueueLeftTime
+                        10,                            # RestingTimeSeconds
                     ],
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 95,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 65,             # QueueJoinTime
-                        $StatsStartSystemTime + 95,             # QueueLeftTime
-                        30,                                     # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 95,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        1,                             # Queue
+                        $StatsStartSystemTime + 65,    # QueueJoinTime
+                        $StatsStartSystemTime + 95,    # QueueLeftTime
+                        30,                            # RestingTimeSeconds
                     ],
                     [
-                        $StatsStartSystemTime + 5,              # Created
-                        $StatsStartSystemTime + 95,             # Changed
-                        '',                                     # Closed
-                        'open',                                 # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 95,             # QueueJoinTime
-                        '',                                     # QueueLeftTime
-                        5,                                      # RestingTimeSeconds
+                        $StatsStartSystemTime + 5,     # Created
+                        $StatsStartSystemTime + 95,    # Changed
+                        '',                            # Closed
+                        'open',                        # State
+                        2,                             # Queue
+                        $StatsStartSystemTime + 95,    # QueueJoinTime
+                        '',                            # QueueLeftTime
+                        5,                             # RestingTimeSeconds
                     ],
                 ],
             },
             TicketData => [
                 {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
+                    Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                    State     => 'open',                      # 'open', 'pending reminder' or 'closed'
                     TimeStamp => $StatsStartSystemTime + 5,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 55,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 1,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 65,
                 },
                 {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
+                    Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                    Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
                     TimeStamp => $StatsStartSystemTime + 95,
                 },
             ],
         },
         'start before timeframe, move, close, move, reopen, move back and forth, then close after timeframe'
             => {
-            ExpectedResult => {
-                Listed => 1,                                    # 1 or 0
-                Data   => [
-                    [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 101,            # Changed
-                        $StatsStartSystemTime + 101,            # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime - 5,              # QueueJoinTime
-                        $StatsStartSystemTime + 3,              # QueueLeftTime
-                        8,                                      # RestingTimeSeconds
+                ExpectedResult => {
+                    Listed => 1,    # 1 or 0
+                    Data   => [
+                        [
+                            $StatsStartSystemTime - 5,      # Created
+                            $StatsStartSystemTime + 101,    # Changed
+                            $StatsStartSystemTime + 101,    # Closed
+                            'closed',                       # State
+                            1,                              # Queue
+                            $StatsStartSystemTime - 5,      # QueueJoinTime
+                            $StatsStartSystemTime + 3,      # QueueLeftTime
+                            8,                              # RestingTimeSeconds
+                        ],
+                        [
+                            $StatsStartSystemTime - 5,      # Created
+                            $StatsStartSystemTime + 101,    # Changed
+                            $StatsStartSystemTime + 101,    # Closed
+                            'closed',                       # State
+                            2,                              # Queue
+                            $StatsStartSystemTime + 3,      # QueueJoinTime
+                            $StatsStartSystemTime + 12,     # QueueLeftTime
+                            9,                              # RestingTimeSeconds
+                        ],
+                        [
+                            $StatsStartSystemTime - 5,      # Created
+                            $StatsStartSystemTime + 101,    # Changed
+                            $StatsStartSystemTime + 101,    # Closed
+                            'closed',                       # State
+                            1,                              # Queue
+                            $StatsStartSystemTime + 19,     # QueueJoinTime
+                            $StatsStartSystemTime + 30,     # QueueLeftTime
+                            11,                             # RestingTimeSeconds
+                        ],
+                        [
+                            $StatsStartSystemTime - 5,      # Created
+                            $StatsStartSystemTime + 101,    # Changed
+                            $StatsStartSystemTime + 101,    # Closed
+                            'closed',                       # State
+                            2,                              # Queue
+                            $StatsStartSystemTime + 30,     # QueueJoinTime
+                            $StatsStartSystemTime + 31,     # QueueLeftTime
+                            1,                              # RestingTimeSeconds
+                        ],
+                        [
+                            $StatsStartSystemTime - 5,      # Created
+                            $StatsStartSystemTime + 101,    # Changed
+                            $StatsStartSystemTime + 101,    # Closed
+                            'closed',                       # State
+                            2,                              # Queue
+                            $StatsStartSystemTime + 80,     # QueueJoinTime
+                            '',                             # QueueLeftTime
+                            20,                             # RestingTimeSeconds
+                        ],
                     ],
-                    [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 101,            # Changed
-                        $StatsStartSystemTime + 101,            # Closed
-                        'closed',                               # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 3,              # QueueJoinTime
-                        $StatsStartSystemTime + 12,             # QueueLeftTime
-                        9,                                      # RestingTimeSeconds
-                    ],
-                    [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 101,            # Changed
-                        $StatsStartSystemTime + 101,            # Closed
-                        'closed',                               # State
-                        1,                                      # Queue
-                        $StatsStartSystemTime + 19,             # QueueJoinTime
-                        $StatsStartSystemTime + 30,             # QueueLeftTime
-                        11,                                     # RestingTimeSeconds
-                    ],
-                    [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 101,            # Changed
-                        $StatsStartSystemTime + 101,            # Closed
-                        'closed',                               # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 30,             # QueueJoinTime
-                        $StatsStartSystemTime + 31,             # QueueLeftTime
-                        1,                                      # RestingTimeSeconds
-                    ],
-                    [
-                        $StatsStartSystemTime - 5,              # Created
-                        $StatsStartSystemTime + 101,            # Changed
-                        $StatsStartSystemTime + 101,            # Closed
-                        'closed',                               # State
-                        2,                                      # Queue
-                        $StatsStartSystemTime + 80,             # QueueJoinTime
-                        '',                                     # QueueLeftTime
-                        20,                                     # RestingTimeSeconds
-                    ],
+                },
+                TicketData => [
+                    {
+                        Action    => 'NewTicket',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 1,                           # 1, 2, or 3 (3 will not be reported)
+                        State     => 'open',                      # 'open', 'pending reminder' or 'closed'
+                        TimeStamp => $StatsStartSystemTime - 5,
+                    },
+                    {
+                        Action    => 'Move',                      # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 2,                           # 1, 2, or 3 (3 will not be reported)
+                        TimeStamp => $StatsStartSystemTime + 3,
+                    },
+                    {
+                        Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        State     => 'closed',                     # 'open', 'pending reminder' or 'closed'
+                        TimeStamp => $StatsStartSystemTime + 12,
+                    },
+                    {
+                        Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 1,                            # 1, 2, or 3 (3 will not be reported)
+                        TimeStamp => $StatsStartSystemTime + 13,
+                    },
+                    {
+                        Action    => 'StateUpdate',                # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        State     => 'pending reminder',           # 'open', 'pending reminder' or 'closed'
+                        TimeStamp => $StatsStartSystemTime + 19,
+                    },
+                    {
+                        Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
+                        TimeStamp => $StatsStartSystemTime + 30,
+                    },
+                    {
+                        Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 3,                            # 1, 2, or 3 (3 will not be reported)
+                        TimeStamp => $StatsStartSystemTime + 31,
+                    },
+                    {
+                        Action    => 'Move',                       # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        Queue     => 2,                            # 1, 2, or 3 (3 will not be reported)
+                        TimeStamp => $StatsStartSystemTime + 80,
+                    },
+                    {
+                        Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
+                        State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
+                        TimeStamp => $StatsStartSystemTime + 101,
+                    },
                 ],
-            },
-            TicketData => [
-                {
-                    Action    => 'NewTicket',                   # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    State     => 'open',                        # 'open', 'pending reminder' or 'closed'
-                    TimeStamp => $StatsStartSystemTime - 5,
-                },
-                {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
-                    TimeStamp => $StatsStartSystemTime + 3,
-                },
-                {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
-                    TimeStamp => $StatsStartSystemTime + 12,
-                },
-                {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 1,                             # 1, 2, or 3 (3 will not be reported)
-                    TimeStamp => $StatsStartSystemTime + 13,
-                },
-                {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'pending reminder',            # 'open', 'pending reminder' or 'closed'
-                    TimeStamp => $StatsStartSystemTime + 19,
-                },
-                {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
-                    TimeStamp => $StatsStartSystemTime + 30,
-                },
-                {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 3,                             # 1, 2, or 3 (3 will not be reported)
-                    TimeStamp => $StatsStartSystemTime + 31,
-                },
-                {
-                    Action    => 'Move',                        # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    Queue     => 2,                             # 1, 2, or 3 (3 will not be reported)
-                    TimeStamp => $StatsStartSystemTime + 80,
-                },
-                {
-                    Action    => 'StateUpdate',                 # 'NewTicket' (or empty), 'Move' or 'StateUpdate'
-                    State     => 'closed',                      # 'open', 'pending reminder' or 'closed'
-                    TimeStamp => $StatsStartSystemTime + 101,
-                },
-            ],
             },
     };
 

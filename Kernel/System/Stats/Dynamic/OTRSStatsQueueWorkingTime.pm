@@ -1,21 +1,21 @@
 # --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otrs - 8207d0f681adcdeb5c1b497ac547a1d9749838d5 - Kernel/System/Stats/Dynamic/TicketList.pm
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
-# --
-
-# ---
-# OTRSExtendedTicketStats
-# ---
-#package Kernel::System::Stats::Dynamic::TicketList;
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
 package Kernel::System::Stats::Dynamic::OTRSStatsQueueWorkingTime;
-# ---
 
 use strict;
 use warnings;
@@ -45,12 +45,8 @@ our @ObjectDependencies = (
     'Kernel::System::Type',
     'Kernel::System::User',
     'Kernel::Output::HTML::Layout',
-# ---
-# OTRSExtendedTicketStats
-# ---
     'Kernel::System::Web::Request',
     'Kernel::Output::HTML::Layout',
-# ---
 );
 
 sub new {
@@ -65,9 +61,7 @@ sub new {
         Valid      => 1,
         ObjectType => ['Ticket'],
     );
-# ---
-# OTRSExtendedTicketStats
-# ---
+
     # get a local queue object
     my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
 
@@ -81,20 +75,13 @@ sub new {
         $Self->{QueueList}->{$Queue} = \%QueueData;
     }
 
-# ---
-
     return $Self;
 }
 
 sub GetObjectName {
     my ( $Self, %Param ) = @_;
 
-# ---
-# OTRSExtendedTicketStats
-# ---
-#    return 'Ticketlist';
     return 'OTRSStatsQueueWorkingTime';
-# ---
 }
 
 sub GetObjectBehaviours {
@@ -1332,12 +1319,8 @@ sub GetStatTable {
             Extended      => $Extended,
             DynamicFields => $NeedDynamicFields,
         );
-# ---
-# OTRSExtendedTicketStats
-# ---
-        $Self->_ModifyTicketQueueTimes( Ticket => \%Ticket );
 
-# ---
+        $Self->_ModifyTicketQueueTimes( Ticket => \%Ticket );
 
         # Format Ticket 'Age' param into human readable format.
         $Ticket{Age} = $StatsObject->_HumanReadableAgeGet(
@@ -1414,7 +1397,7 @@ sub GetStatTable {
                         # change raw value from ticket to a plain text value
                         $Ticket{$ParameterName} = $ValueStrg->{Value};
 
-                        ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+                        ## nofilter(TidyAll::Plugin::OTOBO::Perl::LayoutObject)
                         if ( $DynamicFieldConfig->{Name} =~ /ProcessManagementProcessID|ProcessManagementActivityID/ ) {
                             my $DisplayValue = $DynamicFieldBackendObject->DisplayValueRender(
                                 DynamicFieldConfig => $DynamicFieldConfig,
@@ -1435,16 +1418,16 @@ sub GetStatTable {
         for my $Attribute ( @{$SortedAttributesRef} ) {
             next ATTRIBUTE if !$TicketAttributes{$Attribute};
 
-            # convert from OTRS time zone to given time zone
+            # convert from OTOBO time zone to given time zone
             if (
                 $Param{TimeZone}
-                && $Param{TimeZone} ne Kernel::System::DateTime->OTRSTimeZoneGet()
+                && $Param{TimeZone} ne Kernel::System::DateTime->OTOBOTimeZoneGet()
                 && $Ticket{$Attribute}
                 && $Ticket{$Attribute} =~ /\A(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\z/
                 )
             {
 
-                $Ticket{$Attribute} = $StatsObject->_FromOTRSTimeZone(
+                $Ticket{$Attribute} = $StatsObject->_FromOTOBOTimeZone(
                     String   => $Ticket{$Attribute},
                     TimeZone => $Param{TimeZone},
                 );
@@ -1781,16 +1764,12 @@ sub _TicketAttributes {
 
         $TicketAttributes{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $DynamicFieldConfig->{Label};
     }
-# ---
-# OTRSExtendedTicketStats
-# ---
-    for my $QueueID ( sort keys %{ $Self->{QueueList} } ) {
-        $TicketAttributes{ 'Queue_' . $QueueID . '_Time' }          = 'Queue ' . $Self->{QueueList}->{ $QueueID }->{Name} . ' Time';
-        $TicketAttributes{ 'Queue_' . $QueueID . '_WorkingTime' }   = 'Queue ' . $Self->{QueueList}->{ $QueueID }->{Name} . ' Working Time';
-        $TicketAttributes{ 'Queue_' . $QueueID . '_EffectiveTime' } = 'Queue ' . $Self->{QueueList}->{ $QueueID }->{Name} . ' Effective Time';
-    }
 
-# ---
+    for my $QueueID ( sort keys %{ $Self->{QueueList} } ) {
+        $TicketAttributes{ 'Queue_' . $QueueID . '_Time' }          = 'Queue ' . $Self->{QueueList}->{$QueueID}->{Name} . ' Time';
+        $TicketAttributes{ 'Queue_' . $QueueID . '_WorkingTime' }   = 'Queue ' . $Self->{QueueList}->{$QueueID}->{Name} . ' Working Time';
+        $TicketAttributes{ 'Queue_' . $QueueID . '_EffectiveTime' } = 'Queue ' . $Self->{QueueList}->{$QueueID}->{Name} . ' Effective Time';
+    }
 
     return \%TicketAttributes;
 }
@@ -1871,16 +1850,12 @@ sub _SortedAttributes {
         # add dynamic field attribute
         push @SortedAttributes, 'DynamicField_' . $DynamicFieldConfig->{Name};
     }
-# ---
-# OTRSExtendedTicketStats
-# ---
+
     for my $QueueID ( sort keys %{ $Self->{QueueList} } ) {
         push @SortedAttributes, 'Queue_' . $QueueID . '_Time';
         push @SortedAttributes, 'Queue_' . $QueueID . '_WorkingTime';
         push @SortedAttributes, 'Queue_' . $QueueID . '_EffectiveTime';
     }
-
-# ---
 
     return \@SortedAttributes;
 }
@@ -1951,8 +1926,7 @@ sub _OrderByIsValueOfTicketSearchSort {
 
         # add dynamic field if is sortable
         if ($IsSortable) {
-            $SortOptions{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-                = 'DynamicField_' . $DynamicFieldConfig->{Name};
+            $SortOptions{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 'DynamicField_' . $DynamicFieldConfig->{Name};
         }
     }
 
@@ -2052,9 +2026,7 @@ sub _IndividualResultOrder {
 
     return @Sorted;
 }
-# ---
-# OTRSExtendedTicketStats
-# ---
+
 sub _ModifyTicketQueueTimes {
     my ( $Self, %Param ) = @_;
 
@@ -2063,7 +2035,7 @@ sub _ModifyTicketQueueTimes {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message => "Need $Needed!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2077,7 +2049,7 @@ sub _ModifyTicketQueueTimes {
         $Ticket->{ 'Queue_' . $QueueID . '_Time' }          = 0;
         $Ticket->{ 'Queue_' . $QueueID . '_WorkingTime' }   = 0;
         $Ticket->{ 'Queue_' . $QueueID . '_EffectiveTime' } = '';
-        $EffectiveTime{ $QueueID } = {};
+        $EffectiveTime{$QueueID}                            = {};
     }
 
     my @HistoryLines = $Kernel::OM->Get('Kernel::System::Ticket')->HistoryGet(
@@ -2086,14 +2058,14 @@ sub _ModifyTicketQueueTimes {
     );
 
     my @ClosedStates = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
-        StateType => ['closed', 'merged', 'removed'],
+        StateType => [ 'closed', 'merged', 'removed' ],
         Result    => 'ID',
     );
 
-    return 1 if !IsArrayRefWithData(\@HistoryLines);
+    return 1 if !IsArrayRefWithData( \@HistoryLines );
     return 1 if @HistoryLines < 1;
 
-    my @IndexList = ( 'CALCULATE_LAST' );
+    my @IndexList = ('CALCULATE_LAST');
     if ( @HistoryLines > 1 ) {
         push @IndexList, ( 1 .. $#HistoryLines );
     }
@@ -2103,15 +2075,15 @@ sub _ModifyTicketQueueTimes {
 
         my $PreviousHistory;
         my $CurrentHistory;
-        if (IsStringWithData($Index) && $Index eq 'CALCULATE_LAST') {
+        if ( IsStringWithData($Index) && $Index eq 'CALCULATE_LAST' ) {
             $PreviousHistory = $HistoryLines[-1];
-            $CurrentHistory = {
-                %{ $PreviousHistory },
+            $CurrentHistory  = {
+                %{$PreviousHistory},
                 CreateTime => $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
             };
         }
-        else{
-            $PreviousHistory = $HistoryLines[$Index - 1];
+        else {
+            $PreviousHistory = $HistoryLines[ $Index - 1 ];
             $CurrentHistory  = $HistoryLines[$Index];
         }
 
@@ -2134,8 +2106,8 @@ sub _ModifyTicketQueueTimes {
             my $AccountedTime = $1;
             my $UserID        = $PreviousHistory->{CreateBy};
 
-            $EffectiveTime{ $QueueID }->{ $UserID } ||= 0;
-            $EffectiveTime{ $QueueID }->{ $UserID } += $AccountedTime;
+            $EffectiveTime{$QueueID}->{$UserID} ||= 0;
+            $EffectiveTime{$QueueID}->{$UserID} += $AccountedTime;
         }
 
         next INDEX if $IsClosed;
@@ -2144,12 +2116,12 @@ sub _ModifyTicketQueueTimes {
         $Ticket->{ 'Queue_' . $QueueID . '_Time' } += $StopTime - $StartTime;
 
         # get queue working time
-        if ( IsStringWithData($Self->{QueueList}->{ $QueueID }->{Calendar}) ) {
+        if ( IsStringWithData( $Self->{QueueList}->{$QueueID}->{Calendar} ) ) {
 
             $Ticket->{ 'Queue_' . $QueueID . '_WorkingTime' } += $Self->_WorkingTime(
                 StartTime => $StartTime,
                 StopTime  => $StopTime,
-                Calendar  => $Self->{QueueList}->{ $QueueID }->{Calendar},
+                Calendar  => $Self->{QueueList}->{$QueueID}->{Calendar},
             );
         }
         else {
@@ -2165,18 +2137,18 @@ sub _ModifyTicketQueueTimes {
         my @OwnerEffectiveTime;
 
         USERID:
-        for my $UserID ( sort { $a <=> $b } keys %{ $EffectiveTime{ $QueueID } } ) {
+        for my $UserID ( sort { $a <=> $b } keys %{ $EffectiveTime{$QueueID} } ) {
             my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
                 UserID => $UserID,
                 Valid  => 1,
             );
 
-            next USERID if !IsHashRefWithData(\%User);
-            next USERID if !$EffectiveTime{ $QueueID }->{ $UserID };
+            next USERID if !IsHashRefWithData( \%User );
+            next USERID if !$EffectiveTime{$QueueID}->{$UserID};
 
-            my $Name = $User{UserFirstname} . " " . $User{UserLastname};
+            my $Name          = $User{UserFirstname} . " " . $User{UserLastname};
             my $TimeFormatted = $LayoutObject->CustomerAge(
-                Age => $EffectiveTime{ $QueueID }->{ $UserID },
+                Age   => $EffectiveTime{$QueueID}->{$UserID},
                 Space => ' ',
             );
 
@@ -2192,7 +2164,7 @@ sub _ModifyTicketQueueTimes {
             Space => ' ',
         );
 
-        next QUEUEID if !IsArrayRefWithData(\@OwnerEffectiveTime);
+        next QUEUEID if !IsArrayRefWithData( \@OwnerEffectiveTime );
 
         $Ticket->{ 'Queue_' . $QueueID . '_EffectiveTime' } = join ', ', @OwnerEffectiveTime;
     }
@@ -2224,7 +2196,7 @@ sub _WorkingTime {
             Epoch => $Param{StartTime},
         },
     );
-    my $StopTime  = $Kernel::OM->Create(
+    my $StopTime = $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {
             Epoch => $Param{StopTime},
@@ -2239,7 +2211,5 @@ sub _WorkingTime {
 
     return $Delta->{AbsoluteSeconds} || 0;
 }
-
-# ---
 
 1;
