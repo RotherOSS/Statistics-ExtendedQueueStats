@@ -11,8 +11,8 @@
     <Description Lang="hu">A kiterjesztett jegystatisztikák csomag.</Description>
     <Filelist>
         <File Permission="660" Location="Kernel/Config/Files/XML/OTRSExtendedTicketStats.xml" />
-        <File Permission="660" Location="Kernel/Language/de_OTRSExtendedTicketStats.pm" />
-        <File Permission="660" Location="Kernel/Language/hu_OTRSExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/Language/de_OTOBOExtendedTicketStats.pm" />
+        <File Permission="660" Location="Kernel/Language/hu_OTOBOExtendedTicketStats.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTRSStatsQueueRestingTime.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/OTRSStatsQueueWorkingTime.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Static/OTRSStatsResponseStatistic.pm" />
