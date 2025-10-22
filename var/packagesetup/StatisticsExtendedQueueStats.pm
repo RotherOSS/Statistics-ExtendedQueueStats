@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package var::packagesetup::ExtendedTicketStats;
+package var::packagesetup::StatisticsExtendedQueueStats;
 
 use strict;
 use warnings;
@@ -27,7 +27,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-var::packagesetup::ExtendedTicketStats - code to execute during package installation
+var::packagesetup::StatisticsExtendedQueueStats - code to execute during package installation
 
 =head1 PUBLIC INTERFACE
 

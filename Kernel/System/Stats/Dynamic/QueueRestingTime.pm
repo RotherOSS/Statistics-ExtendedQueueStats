@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Stats::Dynamic::OTOBOStatsQueueRestingTime;
+package Kernel::System::Stats::Dynamic::QueueRestingTime;
 
 use strict;
 use warnings;
@@ -58,7 +58,7 @@ sub new {
 sub GetObjectName {
     my ( $Self, %Param ) = @_;
 
-    return 'OTOBOStatsQueueRestingTime';
+    return 'QueueRestingTime';
 }
 
 sub GetObjectBehaviours {

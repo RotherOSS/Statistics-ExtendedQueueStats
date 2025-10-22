@@ -7,7 +7,7 @@
 <Format>Print</Format>
 <GraphSize></GraphSize>
 <Object></Object>
-<ObjectModule>Kernel::System::Stats::Static::OTOBOStatsResponseStatistic</ObjectModule>
+<ObjectModule>Kernel::System::Stats::Static::ResponseStatistic</ObjectModule>
 <Permission>admin</Permission>
 <Permission>stats</Permission>
 <StatType>static</StatType>
