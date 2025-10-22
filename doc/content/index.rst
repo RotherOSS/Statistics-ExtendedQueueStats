@@ -41,9 +41,9 @@ This statistic is a modified ticket list to calculate and display the working ti
 
 It contains three new columns for the X axis. In general, the time for the three new columns is calculated based on the time where the ticket was not in a state of type closed, removed or merged. Examples are:
 
-- ``Queue Misc time`` contains the time the agents have worked on a ticket.
-- ``Queue Misc working time`` contains the time the agents have worked on the ticket based on the working calendars of the queue ``Misc``.
-- ``Queue Misc effective time`` contains the time the agents set as time units for the ticket while it was in the queue ``Misc``. The values are displayed for each agent by first and last name in the same column (comma-separated).
+- **Queue Misc time** contains the time the agents have worked on a ticket.
+- **Queue Misc working time** contains the time the agents have worked on the ticket based on the working calendars of the queue **Misc**.
+- **Queue Misc effective time** contains the time the agents set as time units for the ticket while it was in the queue **Misc**. The values are displayed for each agent by first and last name in the same column (comma-separated).
 
 Stats for Response Statistic
 ----------------------------
