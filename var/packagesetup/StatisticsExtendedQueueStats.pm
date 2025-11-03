@@ -21,8 +21,10 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Main',
     'Kernel::System::Stats',
     'Kernel::System::SysConfig',
+    'Kernel::System::XML',
 );
 
 =head1 NAME
@@ -82,6 +84,9 @@ run the code install part
 
 sub CodeInstall {
     my ( $Self, %Param ) = @_;
+
+    # rename potentially existing stats from merged package
+    $Self->_StatsRename();
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
@@ -148,6 +153,89 @@ sub CodeUninstall {
         FilePrefix => $Self->{FilePrefix},
         UserID     => 1,
     );
+
+    return 1;
+}
+
+sub _StatsRename {
+    my ( $Self, %Param ) = @_;
+
+    my $XMLObject = $Kernel::OM->Get('Kernel::System::XML');
+
+    # fetch relevant data - use List as conditions for Search are unpleasant to read
+    my @Keys = $XMLObject->XMLHashList(
+        Type => 'Stats',
+    );
+
+    KEY:
+    for my $Key (@Keys) {
+        my @XMLHash = $XMLObject->XMLHashGet(
+            Type => 'Stats',
+            Key  => $Key,
+        );
+
+        next KEY unless @XMLHash;
+
+        # replace ObjectModule name
+        {
+            my $Name = $XMLHash[0]{'otobo_stats'}[1]{ObjectModule}[1]{Content};
+
+            next KEY
+                unless (
+                    $Name eq 'Kernel::System::Stats::Dynamic::OTRSStatsQueueWorkingTime'
+                    || $Name eq 'Kernel::System::Stats::Dynamic::OTRSStatsQueueRestingTime'
+                    || $Name eq 'Kernel::System::Stats::Static::OTRSStatsResponseStatistic'
+                );
+
+            $Name =~ s/OTRSStats//;
+            $XMLHash[0]{'otobo_stats'}[1]{ObjectModule}[1]{Content} = $Name;
+        }
+
+        # replace File name
+        if ( exists $XMLHash[0]{'otobo_stats'}[1]{File} ) {
+            my $Name = $XMLHash[0]{'otobo_stats'}[1]{File}[1]{Content};
+
+            next KEY unless $Name;
+
+            next KEY
+                unless (
+                    $Name eq 'OTRSStatsQueueWorkingTime'
+                    || $Name eq 'OTRSStatsQueueRestingTime'
+                    || $Name eq 'OTRSStatsResponseStatistic'
+                );
+
+            $Name =~ s/OTRSStats//;
+            $XMLHash[0]{'otobo_stats'}[1]{File}[1]{Content} = $Name;
+        }
+
+        my $Success = $XMLObject->XMLHashUpdate(
+            Type    => 'Stats',
+            Key     => $Key,
+            XMLHash => \@XMLHash,
+        );
+    }
+
+    # rename (read, delete and write) installed.xml file
+    {
+        my $FileOld = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/stats/OTRSStats-ResponseStatistic.xml.installed';
+        my $FileNew = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/stats/OTOBOStats-ResponseStatistic.xml.installed';
+        if ( -e $FileOld ) {
+
+            my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+            my $Content    = $MainObject->FileRead(
+                Location => $FileOld,
+            );
+
+            $MainObject->FileDelete(
+                Location => $FileOld,
+            );
+
+            my $Success = $MainObject->FileWrite(
+                Content  => $Content,
+                Location => $FileNew,
+            );
+        }
+    }
 
     return 1;
 }
