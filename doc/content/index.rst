@@ -14,7 +14,7 @@ System requirements
 
 Framework
 ---------
-OTOBO 10.1.x
+OTOBO 11.0.x
 
 Packages
 --------
@@ -61,13 +61,13 @@ Core::Stats
 
 QueueRestingTime::HistorySearchLimit
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-This setting defines a limit for query results on ticket history table for OTOBOStatsQueueRestingTime stat.
+This setting defines a limit for query results on ticket history table for QueueRestingTime stat.
 
-Stats::DynamicObjectRegistration###OTOBOStatsQueueRestingTime
+Stats::DynamicObjectRegistration###QueueRestingTime
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Module to generate statistics about ticket duration of stay in queues.
 
-Stats::DynamicObjectRegistration###OTOBOStatsQueueWorkingTime
+Stats::DynamicObjectRegistration###QueueWorkingTime
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 A modified ticket list statistic to display the working time per queue.
 
