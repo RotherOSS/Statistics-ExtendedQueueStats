@@ -6,9 +6,9 @@
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.io/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
-    <Description Lang="en">The Statistics-ExtendedQueueStats package.</Description>
+    <Description Lang="en">Contains additional statistic modules for ticket analysis.</Description>
     <Description Lang="de">Das Statistics-ExtendedQueueStats Paket.</Description>
-    <Description Lang="hu">A kiterjesztett jegystatisztikák csomag.</Description>
+    <Description Lang="hu">További statisztikai modulokat tartalmaz a jegyelemzéshez.</Description>
     <Filelist>
         <File Permission="660" Location="Kernel/Config/Files/XML/Statistics-ExtendedQueueStats.xml" />
         <File Permission="660" Location="Kernel/Language/de_StatisticsExtendedQueueStats.pm" />
@@ -79,7 +79,7 @@
         &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Ön az Statistics-ExtendedQueueStats OTOBO csomag telepítésére készül.&lt;br/&gt;
+        Ön a Statistics-ExtendedQueueStats OTOBO-csomag telepítésére készül.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
@@ -112,7 +112,7 @@
         &lt;strong&gt;ÜDVÖZÖLJÜK&lt;/strong&gt;
         &lt;br/&gt;
         &lt;br/&gt;
-        Ön az Statistics-ExtendedQueueStats OTOBO csomag frissítésére készül.&lt;br/&gt;
+        Ön a Statistics-ExtendedQueueStats OTOBO-csomag frissítésére készül.&lt;br/&gt;
         &lt;br/&gt;
         &lt;br/&gt;
         ((enjoy))&lt;br/&gt;
